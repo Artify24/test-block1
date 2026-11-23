@@ -190,9 +190,9 @@ with st.sidebar:
 
     # Target LLM Model Selector
     model_options = [
+        "qwen/qwen3.8-27b",
         "openai/gpt-oss-120b",
-        "qwen/qwen3.6-27b",
-        "llama-3.3-70b-versatile",
+        "openai/gpt-oss-20b",
     ]
     current_default = engine.DEFAULT_MODEL
     default_idx = model_options.index(current_default) if current_default in model_options else 0

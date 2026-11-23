@@ -60,7 +60,7 @@ if os.environ.get("AEGIS_ALLOW_CLOUD") != "1":
     ):
         os.environ.pop(_cloud_key, None)
 
-DEFAULT_MODEL = os.environ.get("AEGIS_MODEL", "openai/gpt-oss-120b")
+DEFAULT_MODEL = os.environ.get("AEGIS_MODEL", "qwen/qwen3.8-27b")
 APPROVAL_TTL_SECONDS = 15 * 60
 DEFAULT_TIMEOUT = 90.0
 
@@ -395,11 +395,7 @@ def _call_groq_api(prompt: str, api_key: Optional[str], model: Optional[str]) ->
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
         }
-        model_id = model or "llama-3.3-70b-versatile"
-        if "gpt-oss" in model_id or "openai" in model_id:
-            model_id = "llama-3.3-70b-versatile"
-        elif "qwen" in model_id:
-            model_id = "qwen-2.5-32b"
+        model_id = model or os.environ.get("AEGIS_MODEL", "qwen/qwen3.8-27b")
 
         payload = {
             "model": model_id,
@@ -415,8 +411,9 @@ def _call_groq_api(prompt: str, api_key: Optional[str], model: Optional[str]) ->
             if resp.status_code == 200:
                 data = resp.json()
                 return data["choices"][0]["message"]["content"].strip()
-            if model_id != "llama-3.3-70b-versatile":
-                payload["model"] = "llama-3.3-70b-versatile"
+            # If specified model was rejected, retry specifically with qwen/qwen3.8-27b
+            if model_id != "qwen/qwen3.8-27b":
+                payload["model"] = "qwen/qwen3.8-27b"
                 resp2 = client.post(url, json=payload, headers=headers)
                 if resp2.status_code == 200:
                     return resp2.json()["choices"][0]["message"]["content"].strip()

@@ -62,7 +62,7 @@ streamlit run streamlit_app.py
    ```toml
    GROQ_API_KEY = "gsk_your_actual_groq_api_key_here"
    # Optional:
-   AEGIS_MODEL = "openai/gpt-oss-120b"
+   AEGIS_MODEL = "qwen/qwen3.8-27b"
    ```
 5. Click **Deploy!** Your app will be live with full interactive capabilities.
 
