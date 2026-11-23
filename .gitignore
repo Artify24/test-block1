@@ -1,0 +1,26 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.pytest_cache/
+
+# Virtual environments
+.venv/
+.venv313/
+
+# Secrets & local config — NEVER commit these
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+*.pem
+*.key
+
+# Test / runtime artifacts
+*.json.report
+master_security_report.json
+aegis_test_report.json
+aegis_audit/

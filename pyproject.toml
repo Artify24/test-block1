@@ -1,0 +1,14 @@
+[project]
+name = "aegis-test"
+version = "1.0.0"
+description = "Public Aegis security testing playground — test Aegis capabilities with a 1,000-prompt library."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "streamlit>=1.40.0",
+    "aegis-security-sdk",
+    "python-dotenv",
+]
+
+[tool.uv]
+package = false
