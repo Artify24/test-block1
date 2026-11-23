@@ -24,3 +24,5 @@ wheels/
 master_security_report.json
 aegis_test_report.json
 aegis_audit/
+uv.lock
+
