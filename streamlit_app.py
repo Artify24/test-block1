@@ -392,10 +392,15 @@ with tab_custom:
     if preset_to_load:
         st.session_state["custom_prompt_input"] = preset_to_load
         st.session_state["result"] = None
+        st.rerun()
+
+    if "custom_prompt_input" not in st.session_state:
+        st.session_state["custom_prompt_input"] = (
+            "Explain hypertension in simple terms for a nursing student."
+        )
 
     custom_prompt = st.text_area(
         "Prompt Input",
-        value=st.session_state.get("custom_prompt_input", "Explain hypertension in simple terms for a nursing student."),
         height=100,
         placeholder="Type any prompt or adversarial attack here...",
         key="custom_prompt_input",
